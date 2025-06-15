@@ -303,7 +303,7 @@ async def get_vavoo_streams(client, mfp_url=None, mfp_password=None):
             effective_channel_name = VAVOO_CHANNEL_NAME_MAP.get(raw_name_from_vavoo.lower(), raw_name_from_vavoo)
 
             # Pulisci ulteriormente l'effective_channel_name e preparalo per il display
-            cleaned_effective_name = _clean_channel_name_vavoo(effective_channel_name)
+            cleaned_effective_name = clean_channel_name_vavoo(effective_channel_name)
 
             # Usa la configurazione dal config
             original_stream_url = f"{BASE_URL_VAVOO}/play/{ch_data['id']}/index.m3u8"
