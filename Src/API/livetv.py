@@ -162,9 +162,11 @@ async def get_livetv_stream_for_channel_and_source(channel_id: str, source: str,
                 return stream
                 
     elif source == "calcio":
-        all_calcio_streams = await get_calcio_streams(client, mfp_url, mfp_password)
-        
-        for stream in all_calcio_streams:
+        print(f"DEBUG: Chiamando get_calcio_streams per {channel_id}")
+        streams = await get_calcio_streams(channel_id, client, mfp_url, mfp_password)
+        print(f"DEBUG: get_calcio_streams ha restituito {len(streams)} stream")
+                
+        for stream in streams:
             if stream['id'] == channel_id: # Confronto diretto con ID unificato
                 return stream
                 
@@ -238,8 +240,9 @@ async def get_static_channel_streams(client, mfp_url=None, mfp_password=None):
         })
     return streams
 
-async def get_calcio_streams(client, mfp_url=None, mfp_password=None):
-    # print("DEBUG: Entrando in get_calcio_streams") # LOG
+async def get_calcio_streams(channel_id, client, mfp_url=None, mfp_password=None):
+    print(f"DEBUG CALCIO: Iniziando ricerca per channel_id: {channel_id}")
+    
     streams = []
     raw_channel_list = []
     
@@ -408,8 +411,9 @@ async def get_vavoo_streams(client, mfp_url=None, mfp_password=None):
 
             streams.append({
                 'id': f"{channel_id_safe}", # Rimosso "omgtv-vavoo-"
-                'title': f"{cleaned_effective_name} (V)",
+                'title': f"{cleaned_effective_name} (V)",  'group': "Vavoo"
                 'url': final_url,
-                'group': "Vavoo"
-            })
+            })    return streams
+
+
     return streams
