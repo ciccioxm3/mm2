@@ -136,7 +136,7 @@ async def get_247ita_streams(client, mfp_url=None, mfp_password=None):
             'id': "dazn-1", # Rimosso "omgtv-247ita-"
             'title': "DAZN 1 (D)",
             'url': final_url_dazn,
-            'logo': STATIC_LOGOS_247ITA.get("dazn 1"),
+            'logo': "https://raw.githubusercontent.com/cribbiox/eventi/refs/heads/main/ddlive.png",
             'group': "247ita"
         })
     return streams
