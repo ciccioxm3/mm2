@@ -299,35 +299,35 @@ async def addon_stream(request: Request,config, type, id,):
                                 streams['streams'].append({'title': f'{Icon}Server D-{i}' + channel['title'], 'url': webru_url_2, "behaviorHints": {"notWebReady": True, "proxyHeaders": {"request": {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3", "Accept": "*/*", "Accept-Language": "en-US,en;q=0.5", "Origin": Origin_webru_url_2, "DNT": "1", "Sec-GPC": "1", "Connection": "keep-alive", "Referer": Referer_webru_url_2, "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "cross-site", "Pragma": "no-cache", "Cache-Control": "no-cache", "TE": "trailers"}}}})
 
             # --- OMGTV Integration (seguendo pattern DLHD) ---
-                    if id in omgtv_channels and OMGTV == "1":  # Aggiungi OMGTV alla config
-                        available_sources = omgtv_channels[id]
+                    if id in livetv_channels and LIVETV == "1":  # Aggiungi LIVETV alla config
+                        available_sources = livetv_channels[id]
                         
                         mfp_url_to_pass = MFP_CREDENTIALS[0] if MFP == "1" and MFP_CREDENTIALS else None
                         mfp_password_to_pass = MFP_CREDENTIALS[1] if MFP == "1" and MFP_CREDENTIALS else None
                         
                         # Prova ogni fonte disponibile per questo canale
-                        for omgtv_source in available_sources:
+                        for livetv_source in available_sources:
                             i = i+1
-                            omgtv_stream = await get_omgtv_stream_for_channel_and_source(
+                            livetv_stream = await get_livetv_stream_for_channel_and_source(
                                 channel_id=id,
-                                source=omgtv_source,
+                                source=livetv_source,
                                 client=client,
                                 mfp_url=mfp_url_to_pass,
                                 mfp_password=mfp_password_to_pass
                             )
                             
-                            if omgtv_stream:
-                                if MFP == "1" and MFP_CREDENTIALS and omgtv_stream['url']:
+                            if livetv_stream:
+                                if MFP == "1" and MFP_CREDENTIALS and livetv_stream['url']:
                                     # URL già processato da MFP nelle funzioni specifiche
                                     streams['streams'].append({
-                                        'title': f"{Icon}Proxied Server OMG-{i} {channel['title']} ({omgtv_source.upper()})",
-                                        'url': omgtv_stream['url']
+                                        'title': f"{Icon}Proxied Server OMG-{i} {channel['title']} ({livetv_source.upper()})",
+                                        'url': livetv_stream['url']
                                     })
                                 else:
                                     # Stream diretto
                                     streams['streams'].append({
-                                        'title': f"{Icon}Server OMG-{i} {channel['title']} ({omgtv_source.upper()})",
-                                        'url': omgtv_stream['url']
+                                        'title': f"{Icon}Server OMG-{i} {channel['title']} ({livetv_source.upper()})",
+                                        'url': livetv_stream['url']
                                     })
                     # --- END OMGTV Integration ---
             
