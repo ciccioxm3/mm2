@@ -145,6 +145,7 @@ async def get_livetv_stream_for_channel_and_source(channel_id: str, source: str,
     Ottiene uno stream per un canale specifico da una fonte specifica LIVETV.
     Esempio: channel_id="sky-uno", source="247ita"
     """
+    print(f"DEBUG: Cercando {channel_id} in fonte {source}")
     if source == "247ita":
         all_247ita_streams = await get_247ita_streams(client, mfp_url, mfp_password)
         
@@ -260,13 +261,91 @@ async def get_calcio_streams(client, mfp_url=None, mfp_password=None):
             
             unique_id_suffix = raw_path_part.rstrip('/').replace("calcio", "").lower()
 
-            # Converti unique_id_suffix in formato standard (es: "x1skynature" -> "sky-nature")
+            # Determina il suffisso del server
+            server_suffix = ""
+            if "x1" in unique_id_suffix:
+                server_suffix = " CT1"
+            elif "x2" in unique_id_suffix:
+                server_suffix = " CT2"
+            elif "x" in unique_id_suffix and "x1" not in unique_id_suffix and "x2" not in unique_id_suffix:
+                server_suffix = " CTX"
+
+            # Pulisci l'ID per la mappatura
             clean_id = unique_id_suffix.replace("x1", "").replace("x2", "").replace("x", "")
-            clean_id = clean_id.replace("sky", "sky-").replace("sport", "-sport").replace("cinema", "-cinema")
-            
+
+            # Mappatura ID unificati
+            if "skyuno" in clean_id:
+                clean_id = "sky-uno"
+            elif "skyatlantic" in clean_id:
+                clean_id = "sky-atlantic"
+            elif "skysportuno" in clean_id:
+                clean_id = "sky-sport-uno"
+            elif "skysportcalcio" in clean_id:
+                clean_id = "sky-sport-calcio"
+            elif "skysportf1" in clean_id:
+                clean_id = "sky-sport-f1"
+            elif "skysport24" in clean_id:
+                clean_id = "sky-sport-24"
+            elif "skysportmotogp" in clean_id:
+                clean_id = "sky-sport-motogp"
+            elif "skysportarena" in clean_id:
+                clean_id = "sky-sport-arena"
+            elif "skysporttennis" in clean_id:
+                clean_id = "sky-sport-tennis"
+            elif "skysportnba" in clean_id:
+                clean_id = "sky-sport-nba"
+            elif "skysportmax" in clean_id:
+                clean_id = "sky-sport-max"
+            elif "skysportgolf" in clean_id:
+                clean_id = "sky-sport-golf"
+            elif "skycinemauno" in clean_id:
+                clean_id = "sky-cinema-uno"
+            elif "skycinemadue" in clean_id:
+                clean_id = "sky-cinema-due"
+            elif "skycinemacomedy" in clean_id:
+                clean_id = "sky-cinema-comedy"
+            elif "skycinemadrama" in clean_id:
+                clean_id = "sky-cinema-drama"
+            elif "skycinemafamily" in clean_id:
+                clean_id = "sky-cinema-family"
+            elif "skycinemaromance" in clean_id:
+                clean_id = "sky-cinema-romance"
+            elif "skycinemasuspence" in clean_id:
+                clean_id = "sky-cinema-suspence"
+            elif "skycinemacollection" in clean_id:
+                clean_id = "sky-cinema-collection"
+            elif "skyserie" in clean_id:
+                clean_id = "sky-serie"
+            elif "skynature" in clean_id:
+                clean_id = "sky-nature"
+            elif "skycrime" in clean_id:
+                clean_id = "sky-crime"
+            elif "skydocumentaries" in clean_id:
+                clean_id = "sky-documentaries"
+            elif "skyinvestigation" in clean_id:
+                clean_id = "sky-investigation"
+            elif "eurosport1" in clean_id:
+                clean_id = "eurosport-1"
+            elif "eurosport2" in clean_id:
+                clean_id = "eurosport-2"
+            elif clean_id == "ac":
+                clean_id = "ac"
+            elif "formula1" in clean_id:
+                clean_id = "formula-1"
+            elif "comedycentral" in clean_id:
+                clean_id = "comedy-central"
+            elif "history" in clean_id:
+                clean_id = "history"
+            elif "seriesi" in clean_id:
+                clean_id = "serie-si"
+
+            # Crea il nome visualizzato con suffisso
+            display_name = clean_id.replace("-", " ").title()
+            final_title = f"{display_name}{server_suffix}"
+
             stream_data = {
-                'id': f"{clean_id}", # Rimosso "omgtv-calcio-"
-                'title': f"{channel_display_name}{server_tag_suffix}", 
+                'id': clean_id,  # ID unificato senza suffisso per la ricerca
+                'title': final_title,  # Nome con suffisso CT1/CT2/CTX per distinguerli
                 'url': final_url,
                 'group': "Calcio"
             }
@@ -313,8 +392,14 @@ async def get_vavoo_streams(client, mfp_url=None, mfp_password=None):
                 final_url = f"{mfp_url}/proxy/hls/manifest.m3u8?api_password={mfp_password}&d={urllib.parse.quote(original_stream_url)}"
             
 
-            channel_id_safe = cleaned_effective_name.lower().replace(' ', '-').replace('+', '')
+            # Usa VAVOO_CHANNEL_NAME_MAP per unificare gli ID:
+            if cleaned_effective_name in VAVOO_CHANNEL_NAME_MAP:
+                channel_id_safe = VAVOO_CHANNEL_NAME_MAP[cleaned_effective_name]
+            else:
+                channel_id_safe = cleaned_effective_name.replace(" ", "-").lower()
             logo_key_for_dict = cleaned_effective_name.lower()
+
+            print(f"DEBUG VAVOO: ID generato: {channel_id_safe} per canale: {cleaned_effective_name}")
 
             streams.append({
                 'id': f"{channel_id_safe}", # Rimosso "omgtv-vavoo-"
