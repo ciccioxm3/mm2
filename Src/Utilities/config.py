@@ -69,8 +69,9 @@ Public_Instance = GENERAL["Public_Instance"]
 Remote_Instance = GENERAL["Remote_Instance"]
 Global_Proxy =  GENERAL["Global_Proxy"]
 
-# Configurazioni LIVETV
-DADDYLIVE_BASE_URL = os.getenv('DADDYLIVE_BASE_URL', 'https://daddylive.dad')
-VAVOO_BASE_URL = os.getenv('VAVOO_BASE_URL', 'https://vavoo.to')
-CALCIOX_BASE_URL = os.getenv('CALCIOX_BASE_URL', 'https://calcionew.newkso.ru/calcio/')
-LIVETV = os.getenv('LIVETV_ENABLED', '1')
+# Configurazioni LIVETV strutturate
+LIVETV_CONFIG = json.loads(os.getenv('LiveTV', '{}'))
+DADDYLIVE_BASE_URL = LIVETV_CONFIG.get('daddylive_url', 'https://daddylive.dad')
+VAVOO_BASE_URL = LIVETV_CONFIG.get('vavoo_url', 'https://vavoo.to')
+CALCIOX_BASE_URL = LIVETV_CONFIG.get('calciox_url', 'https://calcionew.newkso.ru/calcio/')
+LIVETV = LIVETV_CONFIG.get('enabled', '1')
