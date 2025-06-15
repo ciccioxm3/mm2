@@ -1,6 +1,6 @@
 import Src.Utilities.config as config
 
-# Costruisci gli URL completi usando le configurazioni
+# Costruisci gli URL completi usando le configurazioni strutturate
 DADDYLIVECHANNELSURL_247ITA = f"{config.DADDYLIVE_BASE_URL}/24-7-channels.php"
 BASE_URL_CALCIO = config.CALCIOX_BASE_URL
 BASE_URL_VAVOO = config.VAVOO_BASE_URL
