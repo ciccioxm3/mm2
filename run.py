@@ -381,8 +381,10 @@ async def addon_stream(request: Request,config, type, id,):
                 if provider_maps['LORDCHANNEL'] == "1" and LC == "1":
                     url_lordchannel,quality_lordchannel = await lordchannel(id,client)
                     if quality_lordchannel == "FULL HD" and url_lordchannel !=  None:
+                        print(f"LordChannel Found Results for {id}")
                         streams['streams'].append({'name': f"{Name}\n1080p",'title': f'{Icon}LordChannel', 'url': url_lordchannel,'behaviorHints': {'bingeGroup': 'lordchannel1080'}})
                     elif url_lordchannel !=  None:
+                        print(f"LordChannel Found Results for {id}")
                         streams['streams'].append({"name": f"{Name}\n720p",'title': f'{Icon}LordChannel 720p', 'url': url_lordchannel, 'behaviorHints': {'bingeGroup': 'lordchannel720'}})            
                 if provider_maps['FILMPERTUTTI'] == "1" and FT == "1":
                     url_filmpertutti,Host = await filmpertutti(id,client, MFP)
@@ -408,11 +410,13 @@ async def addon_stream(request: Request,config, type, id,):
                 if provider_maps['STREAMINGWATCH'] == "1" and SW == "1":
                     url_streamingwatch,Referer = await streamingwatch(id,client)
                     if url_streamingwatch: 
+                        print(f"StreamingWatch Found Results for {id}")
                         streams['streams'].append({'name': f"{Name}\n720/1080p",'title': f'{Icon}StreamingWatch', 'url': url_streamingwatch,  'behaviorHints': {'proxyHeaders': {"request": {"Referer": Referer}}, 'notWebReady': True, 'bingeGroup': 'streamingwatch'}})
                 if provider_maps['DDLSTREAM'] == "1" and DDL == "1":
                     if MFP == "1":
                         results = await ddlstream(id,client)
                         if  results:
+                            print(f"DDLStreamItaly Found Results for {id}")
                             url_ddlstream = results[0]
                             quality = results[1]
                             name = unquote(url_ddlstream.split('/')[-1].replace(".mp4",""))
@@ -422,6 +426,7 @@ async def addon_stream(request: Request,config, type, id,):
                 if provider_maps['CB01'] == "1" and CB == "1":
                     url_cbo1 = await cb01(id,client,MFP)
                     if url_cbo1:
+                        print(f"CB01 Found Results for {id}")
                         if "mixdrop" in url_cbo1:
                             if MFP == "1" and MFP_CREDENTIALS: # Assicurati che MFP_CREDENTIALS esista
                                 MFP_url, MFP_password = MFP_CREDENTIALS
@@ -437,14 +442,17 @@ async def addon_stream(request: Request,config, type, id,):
             if provider_maps['GUARDASERIE'] == "1" and GS == "1":
                 url_guardaserie = await guardaserie(id,client)
                 if url_guardaserie:
+                    print(f"Guardaserie Found Results for {id}")
                     streams['streams'].append({'name': f"{Name}",'title': f'{Icon}Guardaserie', 'url': url_guardaserie, 'behaviorHints': {'bingeGroup': 'guardaserie'}})
             if provider_maps['GUARDAHD'] == "1" and GHD == "1":
                 url_guardahd = await guardahd(id,client)
                 if url_guardahd:
+                    print(f"GuardaHD Found Results for {id}")
                     streams['streams'].append({'name': f"{Name}",'title': f'{Icon}GuardaHD', 'url': url_guardahd, 'behaviorHints': {'bingeGroup': 'guardahd'}})
             if provider_maps['ONLINESERIETV'] == "1" and OST == "1":
                 url_onlineserietv,name = await onlineserietv(id,client)
                 if url_onlineserietv:
+                    print(f"OnlineSerieTV Found Results for {id}")
                     streams['streams'].append({'name': f"{Name}",'title': f'{Icon}OnlineSerieTV\n{name}', 'url': url_onlineserietv, 'behaviorHints': {'proxyHeaders': {'request': {"User-Agent": 'Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.71 Mobile Safari/537.36', "Referer": "https://flexy.stream/"}}, 'bingeGroup': 'onlineserietv', 'notWebReady': True}})
             
         if not streams['streams']:
