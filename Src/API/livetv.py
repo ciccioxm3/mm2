@@ -3,8 +3,13 @@ import re
 import urllib.parse
 import asyncio
 from Src.Utilities.dictionaries import (
-    STATIC_CHANNELS_DATA, DADDYLIVE_CHANNEL_NAME_MAP, 
-    VAVOO_CHANNEL_NAME_MAP, DADDYLIVECHANNELSURL_247ITA, BASE_URL_CALCIO, BASE_URL_VAVOO, clean_channel_name_vavoo
+    STATIC_CHANNELS_DATA, 
+    DADDYLIVE_CHANNEL_NAME_MAP, 
+    VAVOO_CHANNEL_NAME_MAP, 
+    DADDYLIVECHANNELSURL_247ITA, 
+    BASE_URL_CALCIO, 
+    BASE_URL_VAVOO, 
+    clean_channel_name_vavoo
 )
 
 import Src.Utilities.config as config
@@ -117,7 +122,7 @@ async def get_247ita_streams(client, mfp_url=None, mfp_password=None):
                 'id': f"{channel_name_final_display.lower().replace(' ', '-')}", # Rimosso "omgtv-247ita-"
                 'title': f"{channel_name_final_display} (D)",
                 'url': final_url,
-                'logo': STATIC_LOGOS_247ITA.get(channel_name_final_display.lower(), "https://raw.githubusercontent.com/cribbiox/eventi/refs/heads/main/ddlive.png"),
+                'logo': "https://raw.githubusercontent.com/cribbiox/eventi/refs/heads/main/ddlive.png",
                 'group': "247ita" # Per raggruppamento in MammaMia
             })
 
