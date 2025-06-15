@@ -414,7 +414,8 @@ async def get_vavoo_streams(client, mfp_url=None, mfp_password=None):
                 'title': f"{cleaned_effective_name} (V)",  
                 'group': "Vavoo",
                 'url': final_url
-            })    return streams
+            })    
+            return streams
 
 
     return streams
