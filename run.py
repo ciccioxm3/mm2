@@ -60,7 +60,6 @@ Icon = config.Icon
 Name = config.Name
 SKY_DOMAIN = config.SKY_DOMAIN
 LIVETV = config.LIVETV
-
 Remote_Instance = config.Remote_Instance
     #Cool code to set the hugging face if the service is hosted there.
 if MYSTERIUS == "1":
