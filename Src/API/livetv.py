@@ -122,7 +122,6 @@ async def get_247ita_streams(client, mfp_url=None, mfp_password=None):
                 'id': f"{channel_name_final_display.lower().replace(' ', '-')}", # Rimosso "omgtv-247ita-"
                 'title': f"{channel_name_final_display} (D)",
                 'url': final_url,
-                'logo': "https://raw.githubusercontent.com/cribbiox/eventi/refs/heads/main/ddlive.png",
                 'group': "247ita" # Per raggruppamento in MammaMia
             })
 
@@ -136,7 +135,6 @@ async def get_247ita_streams(client, mfp_url=None, mfp_password=None):
             'id': "dazn-1", # Rimosso "omgtv-247ita-"
             'title': "DAZN 1 (D)",
             'url': final_url_dazn,
-            'logo': "https://raw.githubusercontent.com/cribbiox/eventi/refs/heads/main/ddlive.png",
             'group': "247ita"
         })
     return streams
@@ -187,7 +185,6 @@ async def get_static_channel_streams(client, mfp_url=None, mfp_password=None):
         original_channel_id = channel_data.get('id')
         original_channel_title = channel_data.get('title')
         original_channel_url = channel_data.get('url')
-        original_channel_logo = channel_data.get('logo')
         group_name = channel_data.get('group', "Statici")
 
         # Salta i canali se mancano informazioni essenziali, specialmente l'URL
@@ -237,17 +234,13 @@ async def get_static_channel_streams(client, mfp_url=None, mfp_password=None):
             'url': final_url,
             'group': group_name
         })
-        # Aggiungi il logo solo se esiste
-        if original_channel_logo:
-            streams[-1]['logo'] = original_channel_logo
-        # print(f"DEBUG LIVETV (static): Aggiunto stream: {streams[-1]}")
     return streams
 
 async def get_calcio_streams(client, mfp_url=None, mfp_password=None):
     # print("DEBUG: Entrando in get_calcio_streams") # LOG
     streams = []
-    raw_channel_list = CHANNELS_RAW_CALCIO + [item[1].split('/mono.m3u8')[0] + '/' for item in EXTRA_CHANNELS_CALCIO]
-
+    raw_channel_list = []
+    
     if not raw_channel_list:
         # print("DEBUG: raw_channel_list è vuota in get_calcio_streams") # LOG
         return []
@@ -275,7 +268,6 @@ async def get_calcio_streams(client, mfp_url=None, mfp_password=None):
                 'id': f"{clean_id}", # Rimosso "omgtv-calcio-"
                 'title': f"{channel_display_name}{server_tag_suffix}", 
                 'url': final_url,
-                'logo': LOGO_URL_CALCIO,
                 'group': "Calcio"
             }
             streams.append(stream_data)
@@ -328,7 +320,6 @@ async def get_vavoo_streams(client, mfp_url=None, mfp_password=None):
                 'id': f"{channel_id_safe}", # Rimosso "omgtv-vavoo-"
                 'title': f"{cleaned_effective_name} (V)",
                 'url': final_url,
-                'logo': CHANNEL_LOGOS_VAVOO.get(logo_key_for_dict, "https://www.vavoo.tv/software/images/logo.png"), # Fallback logo Vavoo
                 'group': "Vavoo"
             })
     return streams
