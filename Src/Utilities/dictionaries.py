@@ -1405,3 +1405,99 @@ livetv_channels = {
     "formula-1": ["calcio", "vavoo", "static"],
     "sport-italia": ["calcio", "vavoo", "static"],
 }
+
+
+DADDYLIVE_CHANNEL_NAME_MAP = {
+    "sky calcio 1": "Sky Sport 251",
+    "skycalcio1": "Sky Sport 251",
+    "sky calcio1": "Sky Sport 251",
+    "sky sport calcio 1": "Sky Sport 251",
+    "sky calcio 2": "Sky Sport 252",
+    "skycalcio2": "Sky Sport 252",
+    "sky calcio2": "Sky Sport 252",
+    "sky sport calcio 2": "Sky Sport 252",
+    "sky calcio 3": "Sky Sport 253",
+    "skycalcio3": "Sky Sport 253",
+    "sky calcio3": "Sky Sport 253",
+    "sky sport calcio 3": "Sky Sport 253",
+    "sky calcio 4": "Sky Sport 254",
+    "skycalcio4": "Sky Sport 254",
+    "sky calcio 5": "Sky Sport 255",
+    "skycalcio5": "Sky Sport 255",
+    "sky calcio 6": "Sky Sport 256",
+    "skycalcio6": "Sky Sport 256",
+    "sky calcio 7": "Sky Sport 257",
+    "skycalcio7": "Sky Sport 257"
+}
+
+VAVOO_CHANNEL_NAME_MAP = {
+    "sky calcio 1": "Sky Sport 251",
+    "sky calcio 2": "Sky Sport 252", 
+    "sky calcio 3": "Sky Sport 253",
+    "sky calcio 4": "Sky Sport 254",
+    "sky calcio 5": "Sky Sport 255",
+    "sky calcio 6": "Sky Sport 256",
+    "sky calcio 7": "Sky Sport 257",
+    "sky uno": "sky-uno",
+    "sky atlantic": "sky-atlantic",
+    "sky sport uno": "sky-sport-uno",
+    "sky sport calcio": "sky-sport-calcio",
+    "sky sport f1": "sky-sport-f1",
+    "sky sport 24": "sky-sport-24",
+    "sky sport motogp": "sky-sport-motogp",
+    "sky sport arena": "sky-sport-arena",
+    "sky sport tennis": "sky-sport-tennis",
+    "sky sport nba": "sky-sport-nba",
+    "sky sport max": "sky-sport-max",
+    "sky sport golf": "sky-sport-golf",
+    "sky cinema uno": "sky-cinema-uno",
+    "sky cinema due": "sky-cinema-due",
+    "sky cinema comedy": "sky-cinema-comedy",
+    "sky cinema drama": "sky-cinema-drama",
+    "sky cinema family": "sky-cinema-family",
+    "sky cinema romance": "sky-cinema-romance",
+    "sky cinema suspence": "sky-cinema-suspence",
+    "sky cinema collection": "sky-cinema-collection",
+    "sky arte": "sky-arte",
+    "sky serie": "sky-serie",
+    "sky nature": "sky-nature",
+    "sky crime": "sky-crime",
+    "sky documentaries": "sky-documentaries",
+    "sky investigation": "sky-investigation",
+    "eurosport 1": "eurosport-1",
+    "eurosport 2": "eurosport-2",
+    "dazn 1": "dazn-1",
+    "rai 1": "rai-1",
+    "rai 2": "rai-2", 
+    "rai 3": "rai-3",
+    "italia 1": "italia-1",
+    "rete 4": "rete-4",
+    "canale 5": "canale-5",
+    "la7": "la7",
+    "tv8": "tv8",
+    "nove": "nove",
+    "dmax": "dmax",
+    "real time": "real-time",
+    "focus": "focus",
+    "cielo": "cielo"
+}
+
+# Funzione per pulire i nomi dei canali VAVOO
+def clean_channel_name_vavoo(channel_name):
+    """
+    Pulisce il nome del canale VAVOO rimuovendo caratteri speciali e normalizzando.
+    """
+    if not channel_name:
+        return ""
+    
+    # Converti in minuscolo e rimuovi spazi extra
+    cleaned = channel_name.lower().strip()
+    
+    # Rimuovi caratteri speciali comuni
+    cleaned = cleaned.replace("(", "").replace(")", "").replace("[", "").replace("]", "")
+    cleaned = cleaned.replace(".", "").replace("-", " ").replace("_", " ")
+    
+    # Normalizza spazi multipli
+    cleaned = " ".join(cleaned.split())
+    
+    return cleaned
