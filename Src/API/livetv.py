@@ -311,7 +311,7 @@ async def get_vavoo_streams(client, mfp_url=None, mfp_password=None):
             final_url = original_stream_url
             if mfp_url and mfp_password:
                 final_url = f"{mfp_url}/proxy/hls/manifest.m3u8?api_password={mfp_password}&d={urllib.parse.quote(original_stream_url)}"
-            final_url += HEADER_VAVOO_PARAMS
+            
 
             channel_id_safe = cleaned_effective_name.lower().replace(' ', '-').replace('+', '')
             logo_key_for_dict = cleaned_effective_name.lower()
