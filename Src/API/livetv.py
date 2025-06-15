@@ -411,8 +411,9 @@ async def get_vavoo_streams(client, mfp_url=None, mfp_password=None):
 
             streams.append({
                 'id': f"{channel_id_safe}", # Rimosso "omgtv-vavoo-"
-                'title': f"{cleaned_effective_name} (V)",  'group': "Vavoo"
-                'url': final_url,
+                'title': f"{cleaned_effective_name} (V)",  
+                'group': "Vavoo",
+                'url': final_url
             })    return streams
 
 
