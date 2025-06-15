@@ -4,8 +4,7 @@ import urllib.parse
 import asyncio
 from Src.Utilities.dictionaries import (
     STATIC_CHANNELS_DATA, DADDYLIVE_CHANNEL_NAME_MAP, 
-    CHANNELS_RAW_CALCIO, VAVOO_CHANNEL_NAME_MAP, CHANNEL_LOGOS_VAVOO,
-    DADDYLIVECHANNELSURL_247ITA, BASE_URL_CALCIO, BASE_URL_VAVOO
+    VAVOO_CHANNEL_NAME_MAP, DADDYLIVECHANNELSURL_247ITA, BASE_URL_CALCIO, BASE_URL_VAVOO, clean_channel_name_vavoo
 )
 
 import Src.Utilities.config as config
