@@ -9,7 +9,8 @@ from Src.Utilities.dictionaries import (
     DADDYLIVECHANNELSURL_247ITA, 
     BASE_URL_CALCIO, 
     BASE_URL_VAVOO, 
-    clean_channel_name_vavoo
+    clean_channel_name_vavoo,
+    CHANNELS_RAW_CALCIO  # Aggiungi questo
 )
 
 import Src.Utilities.config as config
@@ -384,6 +385,19 @@ async def get_vavoo_streams(client, mfp_url=None, mfp_password=None):
             # Pulisci ulteriormente l'effective_channel_name e preparalo per il display
             cleaned_effective_name = clean_channel_name_vavoo(effective_channel_name)
 
+            # Rimuovi suffissi numerici (6, 7, etc.) dal nome pulito
+            import re
+            cleaned_without_numbers = re.sub(r'\s+\d+$', '', cleaned_effective_name).strip()
+
+            # Usa VAVOO_CHANNEL_NAME_MAP per mappare al nome unificato
+            if cleaned_without_numbers in VAVOO_CHANNEL_NAME_MAP:
+                channel_id_safe = VAVOO_CHANNEL_NAME_MAP[cleaned_without_numbers]
+            else:
+                # Fallback: converti spazi in trattini e lowercase
+                channel_id_safe = cleaned_without_numbers.replace(" ", "-").lower()
+
+            print(f"DEBUG VAVOO: Nome originale: {effective_channel_name} -> Pulito: {cleaned_without_numbers} -> ID finale: {channel_id_safe}")
+
             # Usa la configurazione dal config
             original_stream_url = f"{BASE_URL_VAVOO}/play/{ch_data['id']}/index.m3u8"
             
@@ -391,15 +405,6 @@ async def get_vavoo_streams(client, mfp_url=None, mfp_password=None):
             if mfp_url and mfp_password:
                 final_url = f"{mfp_url}/proxy/hls/manifest.m3u8?api_password={mfp_password}&d={urllib.parse.quote(original_stream_url)}"
             
-
-            # Usa VAVOO_CHANNEL_NAME_MAP per unificare gli ID:
-            if cleaned_effective_name in VAVOO_CHANNEL_NAME_MAP:
-                channel_id_safe = VAVOO_CHANNEL_NAME_MAP[cleaned_effective_name]
-            else:
-                channel_id_safe = cleaned_effective_name.replace(" ", "-").lower()
-            logo_key_for_dict = cleaned_effective_name.lower()
-
-            print(f"DEBUG VAVOO: ID generato: {channel_id_safe} per canale: {cleaned_effective_name}")
 
             streams.append({
                 'id': f"{channel_id_safe}", # Rimosso "omgtv-vavoo-"
