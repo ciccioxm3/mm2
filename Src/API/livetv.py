@@ -348,7 +348,7 @@ async def get_calcio_streams(channel_id, client, mfp_url=None, mfp_password=None
             final_title = f"{display_name}{server_suffix}"
 
             stream_data = {
-                'id': clean_id,  # ID unificato senza suffisso per la ricerca
+                'id': clean_id,
                 'title': final_title,  # Nome con suffisso CT1/CT2/CTX per distinguerli
                 'url': final_url,
                 'group': "Calcio"
