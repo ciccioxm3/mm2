@@ -90,8 +90,10 @@
        "Remote_Instance": "1",
        "Global_Proxy": "0"
        },
-    "DADDYLIVE_BASE_URL": "https://daddylive.dad",
-    "VAVOO_BASE_URL": "https://vavoo.to", 
-    "CALCIOX_BASE_URL": "https://calcionew.newkso.ru/calcio/",
-    "LIVETV_ENABLED": "1"
+    "LiveTV":{
+        "daddylive_url":"https://daddylive.dad",
+        "vavoo_url":"https://vavoo.to",
+        "calciox_url":"https://calcionew.newkso.ru/calcio/",
+        "enabled":"1"
+    }
   }
