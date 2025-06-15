@@ -1495,3 +1495,40 @@ def clean_channel_name_vavoo(channel_name):
     cleaned = " ".join(cleaned.split())
     
     return cleaned
+
+# Lista canali CalcioX
+CHANNELS_RAW_CALCIO = [
+    "calcioXskyuno/", "calcioXskyatlantic/", "calcioXskysportuno/", 
+    "calcioXskysportcalcio/", "calcioXskysportf1/", "calcioXskysport24/", 
+    "calcioXskysportmotogp/", "calcioXskysportarena/", "calcioXskysporttennis/", 
+    "calcioXskysportnba/", "calcioXskysportmax/", "calcioXskysportgolf/",
+    "calcioXskycinemauno/", "calcioXskycinemadue/", "calcioXskycinemacomedy/", 
+    "calcioXskycinemadrama/", "calcioXskycinemafamily/", "calcioXskycinemaromance/", 
+    "calcioXskycinemasuspence/", "calcioXskycinemacollection/", "calcioXskyserie/", 
+    "calcioXskynature/", "calcioXskycrime/", "calcioXskydocumentaries/", 
+    "calcioXskyinvestigation/", "calcioXskyarte/", "calcioXeurosport1/", 
+    "calcioXeurosport2/", "calcioXformula1/", "calcioXhistory/", 
+    "calcioXcomedycentral/", "calcioXseriesi/", "calcioXac/",
+    "calcioX1skyuno/", "calcioX1skyatlantic/", "calcioX1skysportuno/", 
+    "calcioX1skysportcalcio/", "calcioX1skysportf1/", "calcioX1skysport24/", 
+    "calcioX1skysportmotogp/", "calcioX1skysportarena/", "calcioX1skysporttennis/", 
+    "calcioX1skysportnba/", "calcioX1skysportmax/", "calcioX1skysportgolf/",
+    "calcioX1skycinemauno/", "calcioX1skycinemadue/", "calcioX1skycinemacomedy/", 
+    "calcioX1skycinemadrama/", "calcioX1skycinemafamily/", "calcioX1skycinemaromance/", 
+    "calcioX1skycinemasuspence/", "calcioX1skycinemacollection/", "calcioX1skyserie/", 
+    "calcioX1skynature/", "calcioX1skycrime/", "calcioX1skydocumentaries/", 
+    "calcioX1skyinvestigation/", "calcioX1skyarte/", "calcioX1eurosport1/", 
+    "calcioX1eurosport2/", "calcioX1formula1/", "calcioX1history/", 
+    "calcioX1comedycentral/", "calcioX1seriesi/", "calcioX1ac/",
+    "calcioX2skyuno/", "calcioX2skyatlantic/", "calcioX2skysportuno/", 
+    "calcioX2skysportcalcio/", "calcioX2skysportf1/", "calcioX2skysport24/", 
+    "calcioX2skysportmotogp/", "calcioX2skysportarena/", "calcioX2skysporttennis/", 
+    "calcioX2skysportnba/", "calcioX2skysportmax/", "calcioX2skysportgolf/",
+    "calcioX2skycinemauno/", "calcioX2skycinemadue/", "calcioX2skycinemacomedy/", 
+    "calcioX2skycinemadrama/", "calcioX2skycinemafamily/", "calcioX2skycinemaromance/", 
+    "calcioX2skycinemasuspence/", "calcioX2skycinemacollection/", "calcioX2skyserie/", 
+    "calcioX2skynature/", "calcioX2skycrime/", "calcioX2skydocumentaries/", 
+    "calcioX2skyinvestigation/", "calcioX2skyarte/", "calcioX2eurosport1/", 
+    "calcioX2eurosport2/", "calcioX2formula1/", "calcioX2history/", 
+    "calcioX2comedycentral/", "calcioX2seriesi/", "calcioX2ac/"
+]
